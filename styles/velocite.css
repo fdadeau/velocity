@@ -1,0 +1,359 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+        
+
+/*************************************************************************
+ ***                    Début de la feuille de style                   ***
+ *************************************************************************/ 
+
+body {
+    font-family: sans-serif;
+    font-size: 1vw;
+}
+
+
+/** La carte **/
+        
+#map {
+    width: 100vw;
+    height: 100vh;
+    position: absolute; 
+    top: 0;
+    left: 0;
+    z-index: 0;
+    display: none;
+}
+
+#map h4 {
+    font-size: 120%;
+    font-weight: bold;
+}
+#map p {
+    line-height: 1.2;   
+}
+
+.showMap #map {
+    display: block;   
+}
+
+#map .btnVoir:before {
+    content: 'Voir la station';
+}
+
+.selected #map .btnVoir:before {
+    content: 'Rejoindre la station';   
+}
+
+
+
+/**************************************************************
+ *              Fenêtre principale (vue)                       
+ **************************************************************/
+main {
+    display: block;
+    position: relative;
+    background-image: url(../images/background.png);
+    background-size: cover;
+    width: 100vw;
+    height: calc(100vw * 1066 / 1524);
+    overflow: hidden;
+}
+
+/** Cache rue quand la map est affichée **/
+.showMap main {
+    display: none;   
+}
+
+/** Bouton de sortie de la map avec le vélo **/
+.selected.onbike main .btnExitStation {
+    display: block;   
+}
+
+main .btnExitStation {
+    position: absolute;
+    display: none;
+    width: 5vw;
+    height: 4vw;
+    cursor: pointer;
+}
+main #btnExitStationGauche {
+    top: 33%; 
+    left: 0;
+}
+main #btnExitStationDroite {
+    right: 0;
+    bottom: 38.5%;
+}
+
+
+/** Bloc contenant les bornes et les vélos **/
+#bornes h3 {
+    text-align: center;   
+    background: #E0E0E0;
+    color: black;
+    text-align: center;
+    font-size: 2vw;
+    font-weight: bold;
+    padding: 1vw 0;
+    line-height: 1.4;
+    width: 80%;
+    height: 2vw;
+    overflow-y: visible;
+    position: absolute;
+    border: solid 0.3vw #555;
+    border-radius: 1vw;
+    box-shadow: 0 -0.3vw 0 #555;
+    top: -5vw;
+    left: 50%;
+    transform-origin: 50% 0;
+    transform-style: preserve-3d;
+    transform: rotateX(-60deg) translate(-50%, -50%);
+}
+
+main #bornes {
+    position: absolute;
+    width: 44vw;
+    left: 30%;
+    top: 20%;
+    perspective-origin: center;
+    perspective: 100vw;
+}
+
+main #bornes .borne {
+    display: inline-block;
+    border: none;
+    width: 0.4vw;
+    height: 0.8vw;
+    border-radius: 40%;
+    border: solid 0.3vw #333;
+    margin: 0 1.5vw;
+    position: relative;
+    cursor: pointer;
+    background-color: #111;
+    box-shadow: 0.2vw 0.2vw 0 #333;
+}
+main #bornes > .borne[data-velo]:after {
+    content: '';
+    display: block;
+    --bike-size: 6vw;
+    position: relative;
+    width: var(--bike-size);
+    height: var(--bike-size);
+    background-image: url(../images/bicycle.png);
+    background-size: calc(8 * var(--bike-size)) calc(8 * var(--bike-size));
+    background-position: 0 calc(-2 * var(--bike-size));
+    left: -3.2vw;
+    top: -1vw;
+}
+
+main .light {
+    display: none;
+    width: 0vw;
+    height: 0vw;
+    border-radius: 10%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    background-color: transparent;
+    box-shadow: 0 0 10vw 10vw yellow;
+    -moz-box-shadow: 0 0 10vw 10vw yellow;
+    -o-box-shadow: 0 0 10vw 10vw yellow;
+    -webkit-box-shadow: 0 0 10vw 10vw yellow;
+    z-index: 1000;
+}
+main.lightsOn .light {
+    display: block;   
+}
+main #light1 { top: 20%; left: 3.5%; }
+main #light2 { top: 20%; left: 24%; }
+main #light4 { top: 66.6%; left: 3.5%; }
+main #light5 { top: 66.6%; left: 30%; }
+main #light6 { top: 66.6%; left: 59.5%; }
+main #light0 { top: 20%; left: 93.7%; }
+
+
+
+/***** BOUTONS ****/
+#btnMap, #btnAddCharacter, #btnExit, #icone, #horloge {
+    position: fixed; 
+    display: block;
+    z-index: 10000;
+    border: solid 0.5vw #660000;
+    border-radius: 1vw;
+    background-color: beige;
+    cursor: pointer;
+}
+
+#btnMap {
+    display: none;   
+    top: 1vmin;
+    right: 1vmin;
+    width: 5vw;
+    height: 5vw;
+    background-image: url(../images/map.png);
+    background-size: cover;
+}
+
+body:not(.selected):not(.showMap) #btnMap {
+    display: block;
+}
+
+.showMap #btnMap, .showMap #btnAddCharacter, .showMap #btnExit {
+    display: none;   
+}
+
+#btnAddCharacter, #btnExit {
+    bottom: 1vmin;
+    width: 5vw;
+    height: 5vw;
+    border-radius: 10%;
+    padding: 0;
+}
+#btnAddCharacter {
+    left: 1vw;
+}
+#btnAddCharacter:before {
+    content: '';   
+    display: block;
+    width: 5vw;
+    height: 5vw;
+    background-repeat: no-repeat;
+    background-size: 15vw 20vw;
+}
+#btnAddCharacter:after {
+    content: '+';
+    position: absolute; 
+    font-size: 2vw;
+    line-height: 1.7vw;
+    display: block;
+    text-align: center;
+    top: 0.2vw;
+    right: 0.2vw;
+    padding: 0;
+    height: 1.8vw;
+    width: 1.8vw;
+    color: white;
+    border-radius: 50%;
+    background-color: #660000;
+}
+.selected #btnAddCharacter {
+    display: none;
+}
+
+
+/** Bouton de sortie du personnage **/
+#btnExit {
+    display: none;
+    background-size: cover;    
+    background-image: url(../images/picto-exit.png);      
+    right: 1vmin;
+}
+.selected #btnExit {
+    display: block;   
+}
+.selected.onbike #btnExit {
+    display: none;   
+}
+.showMap #btnExit {
+    display: none !important;   
+}
+
+
+/** HORLOGE **/
+#horloge {
+    top: 1vmin;
+    left: 1vmin;
+    color: black;
+    width: 3em;
+    text-align: center;
+    font-size: 3vh;
+    font-family: monospace;
+    padding: 1vh;
+}
+.showMap #horloge {
+    left: 6vmin;   
+}
+
+
+/** Les boutons de l'IHM **/
+.selected #icone {
+    display: block;
+}
+
+#icone {
+    display: none;
+    bottom: 1vmin;
+    left: 1vmin;
+    height: 4.2vw;
+    width: 25vw;
+}
+#icone span.sprite {
+    position: absolute; 
+    top: -2vw;
+    left: 2.5vw;
+    display: inline-block;
+    margin-right: 1vmin;
+    transform: none;
+}
+#icone span.sprite.onbike {
+    top: -1.8vw;
+    transform: scale(0.8);   
+}
+#icone p {
+    margin-left: 4vw;
+    line-height: 1.2;
+    padding: 1vmin;
+}
+#icone p span {
+    font-size: 80%;
+}
+#icone aside {
+    position: absolute; 
+    bottom: 0.5vmin;
+    right: 0.5vmin;
+}
