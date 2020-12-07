@@ -347,7 +347,7 @@ document.addEventListener("DOMContentLoaded", async function(_e) {
     }
     
     
-    showStation(0);
+    //showStation(0);
     
     /***************************************************************
                         Gestion des personnages
