@@ -23,9 +23,7 @@ document.addEventListener("DOMContentLoaded", async function(_e) {
     const Y_BAS_PIED = 0.635;
     const Y_HAUT_VELO = 0.36;
     const Y_BAS_VELO = 0.59;
-    const X_PASSAGE_GAUCHE = 0.435;
-    const X_PASSAGE_DROITE = 0.46;
-
+    
     
     /**
      *  Initialisation de l'IHM : 
@@ -304,8 +302,6 @@ document.addEventListener("DOMContentLoaded", async function(_e) {
             
         const TOP = (characters.current.bike ? Y_HAUT_VELO : Y_HAUT_PIED) * rect.height;
         const BOTTOM = (characters.current.bike ? Y_BAS_VELO : Y_BAS_PIED) * rect.height;
-        const LEFT = X_PASSAGE_GAUCHE * rect.width;
-        const RIGHT = X_PASSAGE_DROITE * rect.width;
         
         // partie supérieure 
         if (y <= TOP) {
@@ -319,35 +315,19 @@ document.addEventListener("DOMContentLoaded", async function(_e) {
         var point = { x: x * 100 / rect.width, y: y * 100 / rect.height };
         var distTOP = y - TOP;
         var distBOTTOM = BOTTOM - y;
-        var distLEFT = Math.abs(LEFT - x);
-        var distRIGHT = Math.abs(RIGHT - x);
         // partie supérieure
         if (distTOP <= distBOTTOM) {
-            // plus proche du haut que de la partie centrale
-            if (distTOP < distLEFT && distTOP < distRIGHT) {
-                point.y = TOP * 100 / rect.height;   
-            }
-            // partie centrale plus proche
-            else {
-                point.x = (distLEFT < distRIGHT) ? LEFT * 100 / rect.width : RIGHT * 100 / rect.width;
-            }
+            // plus proche du haut 
+            point.y = TOP * 100 / rect.height;   
         }
         else {
-            // plus proche du bas que de la partie centrale
-            if (distBOTTOM < distLEFT && distBOTTOM < distRIGHT) {
-                point.y = BOTTOM * 100 / rect.height;   
-            }
-            // partie centrale plus proche
-            else {
-                point.x = (distLEFT < distRIGHT) ? LEFT * 100 / rect.width : RIGHT * 100 / rect.width;
-            }
+            // plus proche du bas
+            point.y = BOTTOM * 100 / rect.height;   
         }
         return point;
     }
     
-    
-    //showStation(0);
-    
+        
     /***************************************************************
                         Gestion des personnages
     ***************************************************************/    
@@ -562,36 +542,9 @@ document.addEventListener("DOMContentLoaded", async function(_e) {
                 return { x: tabX, y: tabY };
             }
             
-            // en vélo --> traversée directe de la route
-            if (this.bike) {
-                tabX.unshift(this.position.x);   
-                tabY.unshift(tabY[0]);                   
-                return { x: tabX, y: tabY };
-            }
-
-            // A PIED : cas personnage plus haut que sa destination
-            if (this.position.y < tabY[0]) {
-                // --> rejoint la gauche du passage pieton
-                tabX.unshift(X_PASSAGE_GAUCHE * 100);
-                tabY.unshift(tabY[0]);
-                // si nécessaire, descend jusqu'au passage 
-                if (this.position.y <= 100 * Y_HAUT) {
-                    tabX.unshift(tabX[0]);   
-                    tabY.unshift(100 * Y_HAUT);   
-                }
-                return { x: tabX, y: tabY };
-            }
-            
-            // A PIED : cas personnage plus bas   
-
-            // --> rejoint la droite du passage 
-            tabX.unshift(100 * X_PASSAGE_DROITE);
-            tabY.unshift(tabY[0]);
-            // si nécessaire, monte jusqu'au passage 
-            if (this.position.y >= 100 * Y_BAS) {
-                tabX.unshift(tabX[0]);   
-                tabY.unshift(100 * Y_BAS);   
-            }
+            // en vélo ou à pied --> traversée directe de la route en ligne droite
+            tabX.unshift(this.position.x);   
+            tabY.unshift(tabY[0]);                   
             return { x: tabX, y: tabY };
         }
         
