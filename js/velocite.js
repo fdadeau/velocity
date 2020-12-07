@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", async function(_e) {
         // si personnage sélectionné, on le fait entrer dans la station
         if (characters.current) {
             var dist = distanceBetweenStations(characters.current.station, station);
-            var nbMinutes = dist * 1.1 * 4 | 0;
+            var nbMinutes = dist * 1.25 * 4 | 0;
             for (var i=0; i < nbMinutes; i++) {
                 timer.tempo = 20;
                 timer.updateHorloge();  
