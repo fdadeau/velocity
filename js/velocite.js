@@ -38,20 +38,19 @@ document.addEventListener("DOMContentLoaded", async function(_e) {
         var response = await fetch("./js/all_stations.json");  
         if (response.status == 200) {
             var data = await response.json();
-            // utilisé pour calculer la moyenne des lattitudes/longitudes pour centrer la carte
-            var totalLat = 0;
-            var totalLong = 0;
+            var lats = [];
+            var longs = [];
             for (var i=0; i < data.stations.length; i++) {
                 // stockage des stations
                 stations.push(data.stations[i]);
-                totalLat += data.stations[i].latitude;
-                totalLong += data.stations[i].longitude;
+                lats.push(data.stations[i].latitude);
+                longs.push(data.stations[i].longitude);
             }
         }
     
         // définition de la carte 
         mymap = L.map('map', { 
-            center: [totalLat/stations.length, totalLong/stations.length], 
+            center: [(Math.min(...lats) + Math.max(...lats)) / 2, (Math.min(...longs) + Math.max(...longs)) / 2], 
             zoom: 15 
         });
         // tileset de la carte 
