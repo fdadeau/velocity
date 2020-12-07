@@ -215,7 +215,6 @@ document.addEventListener("DOMContentLoaded", async function(_e) {
             
     // clic sur le bouton Exit 
     document.getElementById("btnExit").addEventListener("click", function() {
-        console.log(characters.current);
         if (characters.current && characters.current.state == 1) {
             characters.removeCharacter(characters.current);
         }
@@ -229,7 +228,7 @@ document.addEventListener("DOMContentLoaded", async function(_e) {
         // clic sur une borne
         if (e.target.classList.contains("borne")) {
             // si personnage sélectionné 
-            if (characters.current) {
+            if (characters.current && characters.current.state == 1) {
                 characters.current.goTo(32 + 4*e.target.dataset.index, Y_HAUT_PIED * 100 - 2, function(target) { 
                     var velo = station.bornes[target.dataset.index];
                     // si le personnage n'a pas déjà un vélo et s'il y a un vélo
@@ -286,7 +285,7 @@ document.addEventListener("DOMContentLoaded", async function(_e) {
         }
         
         // clic sur le fond d'écran --> détermine le point le plus proche.
-        if (characters.current) {
+        if (characters.current && characters.current.state == 1) {
             var rect = this.getBoundingClientRect();
             var point = determinePointPlusProche(e.clientX - rect.x, e.clientY - rect.y, rect);
             characters.current.goTo(point.x, point.y, null);    
@@ -385,7 +384,7 @@ document.addEventListener("DOMContentLoaded", async function(_e) {
             if (c.state != 1) {
                 return;   
             }
-            if (c.bike) {
+            if (c.bike != null) {
                 return;   
             }
             // désélectionne le personnage
@@ -514,8 +513,8 @@ document.addEventListener("DOMContentLoaded", async function(_e) {
             this.element.style.top = this.position.y + "%";            
             // add the child to the station
             main.appendChild(this.element);
-            this.state = ARRIVING;
             // démarre l'animation
+            this.state = ARRIVING;
             var percentage = this.bike ? 20 : 10;
             this.goTo(this.position.x < 0 ? percentage : 100 - percentage, this.position.y, function() { this.state = INSIDE; }.bind(this));
         }
