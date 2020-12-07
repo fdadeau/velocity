@@ -129,6 +129,7 @@ document.addEventListener("DOMContentLoaded", async function(_e) {
             var dist = distanceBetweenStations(characters.current.station, station);
             var nbMinutes = dist * 1.1 * 4 | 0;
             for (var i=0; i < nbMinutes; i++) {
+                timer.tempo = 20;
                 timer.updateHorloge();  
             }
             characters.current.station = station;
@@ -738,6 +739,7 @@ document.addEventListener("DOMContentLoaded", async function(_e) {
     var timer = {
         /** Horaire courant (en minutes) */
         current : (Math.random()  * 60 * 24) | 0,
+        tempo: 20,
         /** Démarrage du chronomètre */
         init: function() { 
             if (this.current < 7*60 + 50 || this.current > 21 * 60 + 50) {
@@ -749,6 +751,14 @@ document.addEventListener("DOMContentLoaded", async function(_e) {
         },
         /** Mise à jour de l'affichage */
         updateHorloge: function() {
+            this.tempo++;
+            if (main.classList.contains("lightsOn")) {
+                document.getElementById("light0").style.visibility = (Math.random() < 0.5) ? "visible" : "hidden";
+            }
+            if (this.tempo < 20) {
+                return;   
+            }    
+            this.tempo = 0;
             this.current++;
             var heures = this.current % (24*60) / 60 | 0;
             var minutes = this.current % 60 | 0;
@@ -765,9 +775,6 @@ document.addEventListener("DOMContentLoaded", async function(_e) {
                 if (minutes == 50) {    // --> extinction des lampadaires
                     main.classList.remove("lightsOn");
                 }
-            }
-            if (main.classList.contains("lightsOn")) {
-                document.getElementById("light0").style.visibility = (Math.random() < 0.5) ? "visible" : "hidden";
             }
         }
     };
