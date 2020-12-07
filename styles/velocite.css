@@ -138,11 +138,11 @@ main #btnExitStationDroite {
     background: #E0E0E0;
     color: black;
     text-align: center;
-    font-size: 2vw;
+    font-size: 1.5vw;
     font-weight: bold;
-    padding: 1vw 0;
+    padding: 1vw;
     line-height: 1.4;
-    width: 80%;
+    width: auto;
     height: 2vw;
     overflow-y: visible;
     position: absolute;

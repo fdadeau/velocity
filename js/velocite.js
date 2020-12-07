@@ -542,10 +542,29 @@ document.addEventListener("DOMContentLoaded", async function(_e) {
                 return { x: tabX, y: tabY };
             }
             
-            // en vélo ou à pied --> traversée directe de la route en ligne droite
+            // à pied --> traversée directe de la route en ligne droite
+            if (!this.bike) {
+                tabX.unshift(this.position.x);   
+                tabY.unshift(tabY[0]);                   
+                return { x: tabX, y: tabY };
+            }
+            
+            if (this.position.y >= 100 * Y_BAS && destX > this.position.x || 
+                this.position.y <= 100 * Y_HAUT && destX < this.position.x) {
+                tabX.unshift(tabX[0]);
+                tabY.unshift(this.position.y);
+                if (this.position.y < 100 * Y_HAUT) {
+                    tabY[0] = 100 * Y_HAUT;
+                    tabX.unshift(this.position.x);
+                    tabY.unshift(100 * Y_HAUT);
+                }
+                return { x: tabX, y: tabY }; 
+            }
+            
             tabX.unshift(this.position.x);   
             tabY.unshift(tabY[0]);                   
             return { x: tabX, y: tabY };
+            
         }
         
         
