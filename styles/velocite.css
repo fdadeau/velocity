@@ -142,7 +142,7 @@ main #btnExitStationDroite {
     font-weight: bold;
     padding: 1vw;
     line-height: 1.4;
-    width: auto;
+    width: 80%;
     height: 2vw;
     overflow-y: visible;
     position: absolute;
