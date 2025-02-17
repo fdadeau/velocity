@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Etude de cas - Vélocité</title>
+    <link type="text/css" rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+
+    <div id="bcPage">
+
+    <header>
+        <h1>Etude de cas - Vélocité</h1>
+    </header>
+        
+    <p>On propose durant les travaux pratiques de construire et tester un système de vélos en libre service, comme Vélocité à Besançon ou Vélib' dans différentes villes dont Paris. </p>
+        
+    <img src="images/velocite.jpg" class="figure">
+
+    <h2>Description de l'application</h2>
+
+        <img src="images/station.png" style="float: right; margin-left: 10px;" alt="Une station de vélos">
+        
+        <p style="clear: none;">Le principe du système que nous considérons est le suivant. Des vélos de différents types sont mis à disposition des usagers, 
+            dans des stations un peu partout en ville. Chacune des stations dispose d'un certain nombre de bornes auxquelles sont arrimés 
+            des vélos qui sont disponibles pour être empruntés. </p>
+        
+        <p style="clear: none;">Un abonné au service peut, à une station donnée, débloquer un vélo présent pour effectuer un trajet avec celui-ci. Le vélo 
+            emprunté sera ensuite reposé soit à la même station, soit à une autre station, en le ré-arrimant à une borne disponible.  </p>
+
+        <img src="images/borne.png" style="float: left; margin-right: 10px;" alt="Une borne de réservation">
+        
+        <p style="clear: none;">La municipalité gère les inscriptions des abonnés et le bon fonctionnement des stations de vélo. Notamment, un service est 
+            en charge de faire la tournée des stations pour répartir les vélos de façon uniforme. Par exemple : dans une ville où existe 
+            un dénivelé important (comme à Besançon entre le centre-ville et l'extérieur de la Boucle), on sait que les stations en bas 
+            de pente sont souvent plus remplies que les stations en haut de colline, il faut donc régulièrement remonter les vélos pour 
+            ainsi rééquilibrer les vélos et les bornes libres disponibles. Similairement, il est également possible que les habitudes de 
+            déplacement des usagers entraîne une pénurie de vélos à certaines stations, à certaines heures de la journée, alors qu'à 
+            d'autres c'est le contraire. Typiquement, en début de matinée, les usagers vivant au centre-ville vont avoir tendance à prendre 
+            un vélo d'une station proche de leur domicile pour ensuite rejoindre leur lieu de travailà côté duquel ils déposeront leur vélo. 
+            Le soir, c'est le phénomène inverse qui se produit. </p>
+
+        <p style="clear: none;">Les vélos peuvent être abimés soit par un des usagers, soit parce qu'ils ont été vandalisés alors qu'ils étaient arrimés 
+            sur la borne. Les vélos peuvent être réparés sur place, ou ramenés à l'atelier pour une réparation plus poussée si cela 
+            s'avère nécessaire. </p>
+    
+    <!--
+    <h2>Description du modèle de données</h2>
+
+        <p>Le diagramme de classes ci-dessous présente les principales entités qui seront développées au fil des différents TP. </p>
+    
+        <img src="./images/DiagClasses-VeloCite.png" class="figure" style="width: 90%; height: auto; max-width: none;">
+
+        <p>Chaque sujet de TP vous fera travailler sur une de ces classes, en illustratnt un aspect particulier du test logiciel 
+            (test unitaire, mocks, tests d'intégration, etc.), du développement logiciel (patrons de conception) et des outils 
+            associés (IDE, gestionnaire de version, debugger, intégration continue, robots d'exécution de tests sur IHM).  </p>
+        
+        <ul>
+            <li>L'interface <code>IVelo</code> représente les vélos et leur usage (arrimage/décrochage, utilisation, dégradation, 
+            réparation, révision, etc.). </li>
+            
+            <li>La classe <code>Velo</code> représente les vélos basiques du système. Ceux-ci présentent différentes caractéristiques 
+            (taille, kilométrage, etc.) et réalisent les méthodes de l'interface <code>IVelo</code>. </li>
+        
+            <li>La classe <code>Option</code> représente une option possible du vélo. Celle-ci modifie le coût du vélo, et potentiellement 
+            sa fréquence de révision. Différentes sous-classes d'options existent. Celles-ci sont réalisées comme des patrons décorateur.</li>
+            
+            <li>La classe <code>FabriqueVelo</code> permet la construction d'un vélo, avec les options choisies. </li>
+
+            <li>La classe <code>Station</code> représente les stations disposées dans la ville. Elle enregistre les bornes 
+            libres qui peuvent accueillir un vélo, ou occupées qui conserve les vélos mis à disposition. </li>
+        
+            <li>La classe <code>Abonné</code> enregistre les abonnés ainsi que leurs coordonnées bancaires. </li>
+            
+            <li>L'interface <code>IRegistre</code> représente un registre qui sert à enregistrer les abonnés et conserver 
+                une trace de leurs emprunts. </li>
+            
+            <li>La classe <code>Ville</code> enregistre les abonnés et les stations, et gère le ré-équilibrage des stations. </li>
+            
+        </ul>    
+    
+        <p>Le fichier <a href="./java/velociteBesancon.txt" target="_blank">velociteBesancon.txt</a> contient une description
+        des stations de la Ville de Besançon. Il pourra vous être utile pour vos tests. </p>
+        
+        <h2>Sujets des séances de TP</h2>
+        
+        <p>Le planning ci-dessous récapitule les séances prévues, et fournit des liens vers les sujets de TP correspondants.  </p>
+        
+    <ol start="0">
+        <li><a href="TP0.html">TP0 - Rappels sur les exceptions et les packages</a> <br>
+            Préambule aux "vrais" TP, connaître les mécanismes évoqués est nécessaire pour réaliser le TP1</li>
+    
+        <li><a href="TP1.html">TP1 - Test unitaire</a> <br>
+            Développement de la classe Abonne et écriture des tests</li>
+        
+        <li><a href="TP2.html">TP2 - Test Driven Development</a> <br>
+            Ecriture des tests puis développement de la classe Velo</li>
+
+        <li><a href="TP3.html">TP3 - Design Patterns</a> <br>
+            Options des vélos et instanciation de ceux-ci (Décorateur + Fabrique + Singleton)</li>
+        
+        <li><a href="TP4.html">TP4 - Mocks</a> <br>
+            Développement et test de la classe Station avec des mock-objects de Velo et de Abonne</li>
+        
+        <li><a href="TP5.html">TP5 - Tests d'intégration</a> <br>
+            Test de la classe Station en intégration avec les classes Velo et Abonne</li>
+        
+        <li><a href="TP6.html">TP6 - Debugger</a> <br>
+            Utilisation d'un debugger pour trouver une erreur dans un analyseur syntaxique. Design pattern visiteur. </li>
+        
+        <li><a href="TP7.html">TP7 - Gestionnaire de version et intégration continue</a> <br>
+            Mise en commun du travail et des tests. Mise en place de l'intégration continue. </li> 
+
+        <li><a href="TP8.html">TP8 - Développement en binôme de la classe Ville</a> <br>
+            Utilisation d'un design pattern itérateur. </li>
+
+        <li><a href="TP9.html">TP9 - Test fonctionnel</a> <br>
+            Ecriture de scénarios de tests fonctionnels du système étudié. </li>
+
+        <li><a href="TP10.html">TP10 - Test d'interfaces graphique</a> <br>
+            Test d'une interface graphique avec un robot d'exécution de tests. </li> 
+
+    </ol>
+-->        
+    </div>
+
+</body>
+
+</html>

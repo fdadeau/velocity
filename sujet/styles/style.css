@@ -1,0 +1,191 @@
+body {
+    font-family: Helevetica, Palatino, Verdana;
+    font-size: 16px;
+    background-color: #D0D0D0;
+    line-height: 1.5;
+}
+
+#bcPage, main {
+    background-color: #FFF;
+    width: 80%;
+    margin: 0px auto;
+    padding: 15px;
+    border: solid 2px #000;
+}
+
+.figure {
+    display: block;
+    margin: 10px auto;
+    width: 80%;
+    max-width: 800px;
+}
+
+
+header {
+    margin: -15px -15px 10px -15px;
+    padding: 10px;
+    text-align: center;   
+    background-color: #7777FF;
+    border-bottom: solid 2px #000;
+    }
+
+h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #FFF;
+    text-shadow: 2px 2px 0.2em black;
+}
+
+.pluspetit {
+    display:block;
+    font-size: 20px;   
+}
+
+h2 {
+	color: #333;
+	font-weight: bold;
+	font-size: 18px;
+	margin: 30px 0px 20px 0px;
+	background: #F7E0A5;
+	padding: 4px;
+	clear: both;
+	border-left: 2em solid #F7C749;
+	}
+
+h3 {
+    margin-top: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 2px solid #FFCC33;
+}
+
+h4 {
+    clear: both;
+    margin-top: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    border-top: 2px solid #000;
+}
+
+p {
+    clear: both;
+    text-align: justify;
+}
+
+li {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+pre {
+    font-size: 14px;
+}
+
+code {
+    font-size: 95%;
+    color: #BB0000;
+    font-weight: bold;
+}
+
+a:link,
+a:visited,
+label {
+    text-decoration: none;
+    color: #0000FF;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #0000FF;
+}
+
+a[href^="http"]:hover::after {
+    content: " - " attr(href);
+}
+
+figure {
+    display: block;
+    width: auto;
+    margin: 10px auto;
+}
+figure > img {
+    display: block;
+    margin: 5px auto;
+}
+figcaption {
+    text-align: center;
+    font-weight: bold;   
+}
+
+
+.important {
+    color: #BB0000;
+    border: solid 1px #BB0000;
+    margin: 10px 20px;
+    padding: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.grammaire {
+    width: 420px;
+    margin-bottom: 10px;
+}
+
+.grammaire td:first-of-type {
+    text-align: right;
+}
+
+.grammaire td:nth-of-type(2) {
+    text-align: center;
+}
+
+.terminal {
+    background-color: black;
+    font-family: courier new;
+    font-size: 14px;
+    color: lightgreen;
+    padding: 5px;
+    text-align: left;
+    width: 60%;
+}
+
+input[type=checkbox] {
+    display: none;
+}
+
+label {
+    width: auto;
+    display: block;
+}
+
+label:hover {
+    cursor: pointer;
+}
+
+input[type=checkbox] + p.terminal {
+    display: none;
+}
+
+input[type=checkbox]:checked + p.terminal {
+    display: block;
+}
+
+.codesource {
+    display: block;
+    font-family: monospace;
+    white-space: pre;
+    margin: 1em auto;
+    border: solid 1px #000;
+    padding: 10px;
+    font-size: 90%;
+    max-width: 800px;
+}
+
+.codesource b {
+    color: blue;
+}
+
+.comments {
+    color: green;
+}
